@@ -11,21 +11,21 @@
     - set_fact:
         new_status: "{{ '1' if (result.status == 200) else '4' }}"
 
-    # - name: Get component details and set current_status var
-    #   uri:
-    #     url: "http://status.cps-400.theosmo.com/api/v1/components/17"
-    #     method: GET
-    #   register: details
-    # - set_fact:
-    #     current_status: "{{ details.json.data.status }}"
-    #
-    # - name: Update component status to new_status IF current != new
-    #   uri:
-    #     url: "http://status.cps-400.theosmo.com/api/v1/components/17"
-    #     method: PUT
-    #     body: " {\"status\": \"{{ new_status }}\" }"
-    #     return_content: yes
-    #     HEADER_X-Cachet-Token: {{ API_token }}
-    #     HEADER_Content-Type: application/json
-    #     body_format: json
-    #   when: '"{{ current_status }}" != "{{ new_status }}"'
+     - name: Get component details and set current_status var
+       uri:
+         url: "http://status.cps-400.theosmo.com/api/v1/components/17"
+         method: GET
+       register: details
+     - set_fact:
+         current_status: "{{ details.json.data.status }}"
+    
+     - name: Update component status to new_status IF current != new
+       uri:
+         url: "http://status.cps-400.theosmo.com/api/v1/components/17"
+         method: PUT
+         body: " {\"status\": \"{{ new_status }}\" }"
+         return_content: yes
+         HEADER_X-Cachet-Token: {{ API_token }}
+         HEADER_Content-Type: application/json
+         body_format: json
+       when: '"{{ current_status }}" != "{{ new_status }}"'
