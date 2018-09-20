@@ -5,7 +5,7 @@
 
     - name: Check url status and set new_status var
       uri:
-        url: {{ url_to_test }}
+        url: "{{ url_to_test }}"
       register: result
       ignore_errors: yes
     - set_fact:
@@ -25,7 +25,7 @@
         method: PUT
         body: " {\"status\": \"{{ new_status }}\" }"
         return_content: yes
-        HEADER_X-Cachet-Token: {{ API_token }}
+        HEADER_X-Cachet-Token: "{{ API_token }}"
         HEADER_Content-Type: application/json
         body_format: json
       when: '"{{ current_status }}" != "{{ new_status }}"'
