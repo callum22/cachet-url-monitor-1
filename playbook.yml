@@ -21,7 +21,7 @@
 
     - name: Update component status to new_status IF current != new
       uri:
-        url: ""{{ cachet_url }}/api/v1/components/{{ component_id }}""
+        url: "{{ cachet_url }}/api/v1/components/{{ component_id }}"
         method: PUT
         body: " {\"status\": \"{{ new_status }}\" }"
         return_content: yes
