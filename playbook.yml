@@ -25,7 +25,8 @@
         method: PUT
         body: " {\"status\": \"{{ new_status }}\" }"
         return_content: yes
-        HEADER_X-Cachet-Token: "{{ API_token }}"
-        HEADER_Content-Type: application/json
+        headers:
+          X-Cachet-Token: "{{ API_token }}"
+          Content-Type: application/json
         body_format: json
       when: '"{{ current_status }}" != "{{ new_status }}"'
